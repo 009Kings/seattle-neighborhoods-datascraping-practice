@@ -1,5 +1,6 @@
 var request = require("request");
 var cheerio = require("cheerio");
+var db = require("./models");
 
 request("http://www.visitseattle.org/things-to-do/neighborhoods/", (error, response, body)=>{
   var $ = cheerio.load(body);
@@ -9,8 +10,18 @@ request("http://www.visitseattle.org/things-to-do/neighborhoods/", (error, respo
       name: $(currentHood).find("h4").text(),
       link: $(currentHood).find("a").attr("href"),
       photo: photo.slice(23, -2),
-      discription: $(currentHood).find("p").text()
+      description: $(currentHood).find("p").text()
     }
-  }).get();
-  console.log(neighborhoods);
+  }).get()
+
+  neighborhoods.forEach((hood)=>{ 
+    db.hood.create({
+      name: hood.name,
+      link: hood.link,
+      photo: hood.photo,
+      description: hood.description
+    }).then((data)=>{
+      console.log(`Added ${data.name}`);
+    }).catch((err)=>console.log(`Bad news bears, you fucked up ${err}`))
+  });
 });
