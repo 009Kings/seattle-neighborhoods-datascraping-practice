@@ -1,0 +1,26 @@
+body {
+  background: #bfe7d6;
+}
+
+nav {
+  padding: 20px 0;
+  background: #6953e973;
+}
+
+nav a {
+  padding: 10px 30px;
+  text-decoration: none;
+}
+
+.big-btn {
+  display: inline-block;
+  padding: 20px;
+  margin: 0 auto;
+  font-size: 2em;
+  border: 3px solid green;
+  border-radius: 3px;
+}
+
+.big-btn a {
+  text-decoration: none;
+}

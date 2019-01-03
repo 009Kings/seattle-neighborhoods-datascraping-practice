@@ -12,16 +12,18 @@ request("http://www.visitseattle.org/things-to-do/neighborhoods/", (error, respo
       photo: photo.slice(23, -2),
       description: $(currentHood).find("p").text()
     }
-  }).get()
+  }).get();
 
   neighborhoods.forEach((hood)=>{ 
-    db.hood.create({
-      name: hood.name,
+    db.hood.findOrCreate({
+      where: {
+      name: hood.name
+    },
+    defaults: {
       link: hood.link,
       photo: hood.photo,
       description: hood.description
-    }).then((data)=>{
-      console.log(`Added ${data.name}`);
-    }).catch((err)=>console.log(`Bad news bears, you fucked up ${err}`))
-  });
-});
+    }
+    }).catch((err)=>{console.log(`Bad news bears, you fucked up ${err}`)})
+  })
+})
