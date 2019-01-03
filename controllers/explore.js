@@ -2,11 +2,11 @@ var express = require("express");
 var router = express.Router();
 
 router.get("/", (req, res)=>{
-  res.send("Let's go esplorin'");
+  res.render("index");
 })
 
 router.get("/:idx", (req, res)=>{
-  res.send(`You are looking at Neighborhood ${req.params.idx}`);
+  res.render("show", {hoodId: req.params.idx});
 })
 
 module.exports = router;

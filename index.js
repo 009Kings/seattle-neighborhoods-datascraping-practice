@@ -13,7 +13,7 @@ app.use("/explore", require("./controllers/explore"));
 
 // Routes
 app.get("/", (req, res)=>{
-  res.send("Dis is a homepage y'all");
+  res.render("home");
   // res.render("home");
 })
 
